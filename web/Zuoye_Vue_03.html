@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zuoye_vue_03</title>
+</head>
+<body>
+<div id="div01">
+    <table01 border="1" :name="name" :author="author" :publisher="publisher" :price="price" :pub-num="pubNum" :book-id="bookId"></table01>
+</div>
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    Vue.component('table01',{
+       props:{
+           name:{
+               type:String,
+               required:true
+           },
+           author:{
+               type:String,
+               required:true
+           },
+           publisher:{
+               type:String,
+               required:true
+           },
+           price:Number,
+           pubNum:Number,
+           bookId:{
+               type:Number,
+               validator:function (value) {
+                   return value>0 && value<=999999;
+               }
+           }
+       },
+       template:'<table><tr>' +
+                '<th>书名</th>'+
+                '<th>作者</th>'+
+                '<th>出版社</th>'+
+                '<th>售价</th>'+
+                '<th>书号</th>'+
+                '<th>库房ID</th>'+
+                '</tr><tr>' +
+                '<td>{{name}}</td>' +
+                '<td>{{author}}</td>' +
+                '<td>{{publisher}}</td>' +
+                '<td>{{price}}</td>' +
+                '<td>{{pubNum}}</td>' +
+                '<td>{{bookId}}</td>' +
+                '</tr></table>'
+    });
+    var vm = new Vue({
+        el:'#div01',
+        data:{
+            name:"上下五千年",
+            author:"张大民",
+            publisher:"xxx出版社",
+            price:86,
+            pubNum:36100706,
+            bookId:10157
+        }
+    });
+</script>
+</body>
+</html>

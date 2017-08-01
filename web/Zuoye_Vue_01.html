@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zuoye_vue_01</title>
+    <style>
+        #divTemp{
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+<div id="div01">
+    <span>0</span><input id="ipt01" type="range" min="0" max="50" v-model="iptValue"><span>50</span>
+    <table border="1">
+        <tr>
+            <th>当前温度</th>
+        </tr>
+        <tr>
+            <td>{{iptValue}}</td>
+        </tr>
+    </table>
+    <div id="divTemp" :style="backgroundColor"></div>
+    <div>{{backgroundColor}}</div>
+</div>
+
+
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    var temp = 25;
+    var vm = new Vue({
+        el:'#div01',
+        data:{
+            iptValue:$('#ipt01').val(),
+            R:0,
+            G:255,
+            B:0,
+            backgroundColor:{}
+        },
+        watch:{
+            iptValue:function () {
+                if(this.iptValue >=0 && this.iptValue<=16){
+                    this.R = 0;
+                    this.G = this.iptValue*15;
+                    this.B = 255;
+                }
+                if(this.iptValue >16 && this.iptValue<=32){
+                    this.R = (this.iptValue - 16)*15;
+                    this.G = 255;
+                    this.B = 0;
+
+                }
+                if(this.iptValue >32 && this.iptValue<=50){
+                    this.R = 255;
+                    this.G = 0;
+                    this.B = (this.iptValue - 33)*15;
+
+                }
+                this.backgroundColor = {'background-color':'rgb('+this.R+','+this.G+','+this.B+')'};
+            }
+        }
+    });
+</script>
+</body>
+</html>

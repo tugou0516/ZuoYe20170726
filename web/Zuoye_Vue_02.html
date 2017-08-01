@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zuoye_vue_02</title>
+</head>
+<body>
+<div id="div01">
+    <range01 min="0" max="50" num="0"></range01>
+</div>
+
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    Vue.component('range01',{
+       props:['min','max','num'],
+       template:'<div><span>{{min}}</span><input type=range :min="min" :max="max" v-model="num"/><span>{{max}}</span>'+
+                '<div>{{num}}</div></div>'
+    });
+    var vm = new Vue({
+        el:"#div01"
+    });
+</script>
+</body>
+</html>
